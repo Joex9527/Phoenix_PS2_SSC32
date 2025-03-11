@@ -57,13 +57,6 @@
 #define	c4DEC		10000
 #define	c6DEC		1000000
 
-#ifdef QUADMODE
-enum {
-  cRR=0, cRF, cLR, cLF, CNT_LEGS};
-#else
-enum {
-  cRR=0, cRM, cRF, cLR, cLM, cLF, CNT_LEGS};
-#endif
 
 #define	WTIMERTICSPERMSMUL  	64	// BAP28 is 16mhz need a multiplyer and divider to make the conversion with /8192
 #define WTIMERTICSPERMSDIV  	125 // 
@@ -99,9 +92,6 @@ extern long GetCmdLineNum(byte **ppszCmdLine);
 // debug handler...
 extern boolean g_fDBGHandleError;
 
-#ifdef c4DOF
-extern const byte cTarsLength[] PROGMEM;
-#endif
 
 #ifdef OPT_BACKGROUND_PROCESS
 #define DoBackgroundProcess()   g_ServoDriver.BackgroundProcess()
@@ -109,30 +99,8 @@ extern const byte cTarsLength[] PROGMEM;
 #define DoBackgroundProcess()   
 #endif
 
-#ifdef DEBUG_IOPINS
-#define DebugToggle(pin)  {digitalWrite(pin, !digitalRead(pin));}
-#define DebugWrite(pin, state) {digitalWrite(pin, state);}
-#else
-#define DebugToggle(pin)  {;}
-#define DebugWrite(pin, state) {;}
-#endif
 
-
-
-#ifdef __AVR__
-#if not defined(UBRR1H)
-#if cSSC_IN != 0
 extern SoftwareSerial SSCSerial;
-#endif
-#endif
-#endif
-#if defined(__PIC32MX__)
-  #if defined F
-    #undef F
-  #endif
-  #define F(X) (X)
-#endif
-
 
 
 //=============================================================================
@@ -180,13 +148,6 @@ typedef struct _PhoenixGait {
 	byte            TLDivFactor;         //Number of steps that a leg is on the floor while walking
 	byte	        HalfLiftHeight;      // How high to lift at halfway up.
 
-#ifdef QUADMODE
-    // Extra information used in the Quad balance mode
-    word			COGAngleStart1;		 // COG shifting starting angle
-    word			COGAngleStep1;		 // COG Angle Steps in degrees
-    byte			COGRadius;			 // COG Radius; the amount the body shifts
-    boolean 		COGCCW;				 // COG Gait sequence runs counter clock wise
-#endif    
 	byte            GaitLegNr[CNT_LEGS]; //Init position of the leg
 #ifdef DISPLAY_GAIT_NAMES
     PGM_P           pszName;             // The gait name
@@ -223,11 +184,6 @@ typedef struct _InControlState {
     short       LegLiftHeight;		 //Current Travel height
   COORD3D       TravelLength;        // X-Z or Length, Y is rotation.
 
-#ifdef cTurretRotPin
-  // Turret information
-  int           TurretRotAngle1;      // Rotation of turrent in 10ths of degree
-  int           TurretTiltAngle1;    // the tile for the turret
-#endif
 
   //[Single Leg Control]
 #ifdef OPT_SINGLELEG
@@ -250,69 +206,9 @@ typedef struct _InControlState {
 
   // 
 
-} 
+}
 INCONTROLSTATE;
 
-//==============================================================================
-//==============================================================================
-// Define the class(s) for Servo Drivers.
-//==============================================================================
-//==============================================================================
-class ServoDriver {
-public:
-  void Init(void);
-
-    uint16_t GetBatteryVoltage(void);
-
-#ifdef OPT_GPPLAYER    
-  inline boolean  FIsGPEnabled(void) {
-    return _fGPEnabled;
-  };
-  boolean         FIsGPSeqDefined(uint8_t iSeq);
-  inline boolean  FIsGPSeqActive(void) {
-    return _fGPActive;
-  };
-  void            GPStartSeq(uint8_t iSeq);  // 0xff - says to abort...
-  void            GPPlayer(void);
-  uint8_t         GPNumSteps(void);          // How many steps does the current sequence have
-  uint8_t         GPCurStep(void);           // Return which step currently on... 
-  void            GPSetSpeedMultiplyer(short sm) ;      // Set the Speed multiplier (100 is default)
-#endif
-  void 			  BeginServoUpdate(void);    // Start the update 
-#ifdef c4DOF
-  void            OutputServoInfoForLeg(byte LegIndex, short sCoxaAngle1, short sFemurAngle1, short sTibiaAngle1, short sTarsAngle1);
-#else
-  void            OutputServoInfoForLeg(byte LegIndex, short sCoxaAngle1, short sFemurAngle1, short sTibiaAngle1);
-#endif    
-#ifdef cTurretRotPin
-  void            OutputServoInfoForTurret(short sRotateAngle1, short sTiltAngle1);
-#endif
-  void            CommitServoDriver(word wMoveTime);
-  void            FreeServos(void);
-
-  void            IdleTime(void);        // called when the main loop when the robot is not on
-
-    // Allow for background process to happen...
-#ifdef OPT_BACKGROUND_PROCESS
-  void            BackgroundProcess(void);
-#endif    
-    
-#ifdef OPT_TERMINAL_MONITOR  
-  void            ShowTerminalCommandList(void);
-  boolean         ProcessTerminalCommand(byte *psz, byte bLen);
-#endif
-
-private:
-
-#ifdef OPT_GPPLAYER    
-  boolean _fGPEnabled;     // IS GP defined for this servo driver?
-  boolean _fGPActive;      // Is a sequence currently active - May change later when we integrate in sequence timing adjustment code
-  uint8_t    _iSeq;        // current sequence we are running
-    short    _sGPSM;        // Speed multiplier +-200 
-#endif
-
-} 
-;   
 
 //==============================================================================
 //==============================================================================

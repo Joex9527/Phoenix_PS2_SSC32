@@ -1,23 +1,31 @@
 
 //====================================================================
-//Project Lynxmotion Phoenix
-//Description: 
-//    This is the hardware configuration file for the Hex Robot.
-//    This Header file is specific for Phoenix with 3 DOF
+// Project Lynxmotion Phoenix
+// Description: 
+//     This is the hardware configuration file for the Hex Robot.
+//     This Header file is specific for Phoenix with 3 DOF
 //  
-//    This version of the Configuration file is set up to run on the
-//    Lynxmotion BotboardDuino board, which is similar to the Arduino Duemilanove
+//     This version of the Configuration file is set up to run on the
+//     Lynxmotion BotboardDuino board, which is similar to the Arduino Duemilanove
 //
-//    This version of configuration file assumes that the servos will be controlled
-//    by a Lynxmotion Servo controller SSC-32 and the user is using a Lynxmotion 
-//    PS2 to control the robot.
+//     This version of configuration file assumes that the servos will be controlled
+//     by a Lynxmotion Servo controller SSC-32 and the user is using a Lynxmotion 
+//     PS2 to control the robot.
 //
-//Date: March 18, 2012
-//Programmer: Kurt (aka KurtE)
+// Date: March 18, 2012
+// Programmer: Kurt (aka KurtE)
 //
+// NEW IN V2.0
+//    - 3 DOF
+// V1.0
+//    - First Release
 //
-//NEW IN V1.0
-//   - First Release
+//    \    /
+//     \__/             ___
+//  _ _|  |_ _      /\_|XXX|_/\ 
+//     |__|        /           \ 
+//     /  \ 
+//    /    \ 
 //
 //====================================================================
 #ifndef HEX_CFG_PHOENIX3_H
@@ -35,12 +43,7 @@
 
 // Which type of control(s) do you want to compile in
 #define DBGSerial         Serial
-//#define DEBUG_IOPINS
 
-#if defined(UBRR1H)
-#define SSCSerial         Serial1
-#else
-#endif
 
 #define USEPS2
 
@@ -76,76 +79,71 @@
 
 //====================================================================
 //[SSC PIN NUMBERS]
-#define cRRCoxaPin      0   //Rear Right leg Hip Horizontal
-#define cRRFemurPin     1   //Rear Right leg Hip Vertical
-#define cRRTibiaPin     2   //Rear Right leg Knee
-#define cRRTarsPin      3   // Tar
+enum SSC_PIN_NUMBERS {
+    cRRCoxaPin ,     //Rear Right leg Hip Horizontal
+    cRRFemurPin,     //Rear Right leg Hip Vertical
+    cRRTibiaPin,     //Rear Right leg Knee
 
-#define cRMCoxaPin      4   //Middle Right leg Hip Horizontal
-#define cRMFemurPin     5   //Middle Right leg Hip Vertical
-#define cRMTibiaPin     6   //Middle Right leg Knee
-#define cRMTarsPin      7   // Tar
+    cRMCoxaPin ,     //Middle Right leg Hip Horizontal
+    cRMFemurPin,     //Middle Right leg Hip Vertical
+    cRMTibiaPin,     //Middle Right leg Knee
 
-#define cRFCoxaPin      8   //Front Right leg Hip Horizontal
-#define cRFFemurPin     9   //Front Right leg Hip Vertical
-#define cRFTibiaPin     10   //Front Right leg Knee
-#define cRFTarsPin      11   // Tar
+    cRFCoxaPin ,     //Front Right leg Hip Horizontal
+    cRFFemurPin,     //Front Right leg Hip Vertical
+    cRFTibiaPin,      //Front Right leg Knee
 
-#define cLRCoxaPin      16   //Rear Left leg Hip Horizontal
-#define cLRFemurPin     17   //Rear Left leg Hip Vertical
-#define cLRTibiaPin     18   //Rear Left leg Knee
-#define cLRTarsPin      19   // Tar
+    cLRCoxaPin ,      //Rear Left leg Hip Horizontal
+    cLRFemurPin,      //Rear Left leg Hip Vertical
+    cLRTibiaPin,      //Rear Left leg Knee
 
-#define cLMCoxaPin      20   //Middle Left leg Hip Horizontal
-#define cLMFemurPin     21   //Middle Left leg Hip Vertical
-#define cLMTibiaPin     22   //Middle Left leg Knee
-#define cLMTarsPin      23   // Tar
+    cLMCoxaPin ,      //Middle Left leg Hip Horizontal
+    cLMFemurPin,      //Middle Left leg Hip Vertical
+    cLMTibiaPin,      //Middle Left leg Knee
 
-#define cLFCoxaPin      24   //Front Left leg Hip Horizontal
-#define cLFFemurPin     25   //Front Left leg Hip Vertical
-#define cLFTibiaPin     26   //Front Left leg Knee
-#define cLFTarsPin      27   // Tar
-
+    cLFCoxaPin ,      //Front Left leg Hip Horizontal
+    cLFFemurPin,      //Front Left leg Hip Vertical
+    cLFTibiaPin,      //Front Left leg Knee
+};
 
 //--------------------------------------------------------------------
 //[MIN/MAX ANGLES]
-#define cRRCoxaMin1	-260	//Mechanical limits of the Right Rear Leg, decimals = 1
-#define cRRCoxaMax1	740
-#define cRRFemurMin1	-1010
-#define cRRFemurMax1	950
-#define cRRTibiaMin1	-1060
-#define cRRTibiaMax1	770
+#define cRRCoxaMin1	    -260	//Mechanical limits of the Right Rear Leg, decimals = 1
+#define cRRCoxaMax1	     740
+#define cRRFemurMin1   -1010
+#define cRRFemurMax1	 950
+#define cRRTibiaMin1   -1060
+#define cRRTibiaMax1	 770
 
-#define cRMCoxaMin1	-530	//Mechanical limits of the Right Middle Leg, decimals = 1
-#define cRMCoxaMax1	530
-#define cRMFemurMin1	-1010
-#define cRMFemurMax1	950
-#define cRMTibiaMin1	-1060
-#define cRMTibiaMax1	770
+#define cRMCoxaMin1	    -530	//Mechanical limits of the Right Middle Leg, decimals = 1
+#define cRMCoxaMax1      530
+#define cRMFemurMin1   -1010
+#define cRMFemurMax1	 950
+#define cRMTibiaMin1   -1060
+#define cRMTibiaMax1	 770
 
-#define cRFCoxaMin1	-580	//Mechanical limits of the Right Front Leg, decimals = 1
-#define cRFCoxaMax1	740
-#define cRFFemurMin1	-1010
-#define cRFFemurMax1	950
-#define cRFTibiaMin1	-1060
-#define cRFTibiaMax1	770
+#define cRFCoxaMin1	    -580	//Mechanical limits of the Right Front Leg, decimals = 1
+#define cRFCoxaMax1	     740
+#define cRFFemurMin1   -1010
+#define cRFFemurMax1	 950
+#define cRFTibiaMin1   -1060
+#define cRFTibiaMax1	 770
 
-#define cLRCoxaMin1	-740	//Mechanical limits of the Left Rear Leg, decimals = 1
-#define cLRCoxaMax1	260
+#define cLRCoxaMin1	    -740	//Mechanical limits of the Left Rear Leg, decimals = 1
+#define cLRCoxaMax1	     260
 #define cLRFemurMin1	-950
 #define cLRFemurMax1	1010
 #define cLRTibiaMin1	-770
 #define cLRTibiaMax1	1060
 
-#define cLMCoxaMin1	-530	//Mechanical limits of the Left Middle Leg, decimals = 1
-#define cLMCoxaMax1	530
+#define cLMCoxaMin1	    -530	//Mechanical limits of the Left Middle Leg, decimals = 1
+#define cLMCoxaMax1	     530
 #define cLMFemurMin1	-950
 #define cLMFemurMax1	1010
 #define cLMTibiaMin1	-770
 #define cLMTibiaMax1	1060
 
-#define cLFCoxaMin1	-740	//Mechanical limits of the Left Front Leg, decimals = 1
-#define cLFCoxaMax1	580
+#define cLFCoxaMin1	    -740	//Mechanical limits of the Left Front Leg, decimals = 1
+#define cLFCoxaMax1	     580
 #define cLFFemurMin1	-950
 #define cLFFemurMax1	1010
 #define cLFTibiaMin1	-770
@@ -158,37 +156,30 @@
 #define cXXCoxaLength     29    // This is for TH3-R legs
 #define cXXFemurLength    76
 #define cXXTibiaLength    106
-#define cXXTarsLength     85    // 4DOF only...
 
 #define cRRCoxaLength     cXXCoxaLength	    //Right Rear leg
 #define cRRFemurLength    cXXFemurLength
 #define cRRTibiaLength    cXXTibiaLength
-#define cRRTarsLength	  cXXTarsLength	    //4DOF ONLY
 
 #define cRMCoxaLength     cXXCoxaLength	    //Right middle leg
 #define cRMFemurLength    cXXFemurLength
 #define cRMTibiaLength    cXXTibiaLength
-#define cRMTarsLength	  cXXTarsLength	    //4DOF ONLY
 
 #define cRFCoxaLength     cXXCoxaLength	    //Rigth front leg
 #define cRFFemurLength    cXXFemurLength
 #define cRFTibiaLength    cXXTibiaLength
-#define cRFTarsLength	  cXXTarsLength    //4DOF ONLY
 
 #define cLRCoxaLength     cXXCoxaLength	    //Left Rear leg
 #define cLRFemurLength    cXXFemurLength
 #define cLRTibiaLength    cXXTibiaLength
-#define cLRTarsLength	  cXXTarsLength    //4DOF ONLY
 
 #define cLMCoxaLength     cXXCoxaLength	    //Left middle leg
 #define cLMFemurLength    cXXFemurLength
 #define cLMTibiaLength    cXXTibiaLength
-#define cLMTarsLength	  cXXTarsLength	    //4DOF ONLY
 
 #define cLFCoxaLength     cXXCoxaLength	    //Left front leg
 #define cLFFemurLength    cXXFemurLength
 #define cLFTibiaLength    cXXTibiaLength
-#define cLFTarsLength	  cXXTarsLength	    //4DOF ONLY
 
 
 //--------------------------------------------------------------------

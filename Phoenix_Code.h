@@ -174,44 +174,6 @@ static const word GetSin[] PROGMEM = {
 #endif
 
 
-#ifndef QUADMODE
-// Standard Hexapod...
-// Servo Horn offsets
-#ifdef cRRFemurHornOffset1   // per leg configuration
-static const short cFemurHornOffset1[] PROGMEM = {
-  cRRFemurHornOffset1, cRMFemurHornOffset1, cRFFemurHornOffset1, cLRFemurHornOffset1, cLMFemurHornOffset1, cLFFemurHornOffset1};
-#define CFEMURHORNOFFSET1(LEGI) ((short)pgm_read_word(&cFemurHornOffset1[LEGI]))
-#else   // Fixed per leg, if not defined 0
-#ifndef cFemurHornOffset1
-#define cFemurHornOffset1  0
-#endif
-#define CFEMURHORNOFFSET1(LEGI)  (cFemurHornOffset1)
-#endif
-
-#ifdef cRRTibiaHornOffset1   // per leg configuration
-static const short cTibiaHornOffset1[] PROGMEM = {
-  cRRTibiaHornOffset1, cRMTibiaHornOffset1, cRFTibiaHornOffset1, cLRTibiaHornOffset1, cLMTibiaHornOffset1, cLFTibiaHornOffset1};
-#define CTIBIAHORNOFFSET1(LEGI) ((short)pgm_read_word(&cTibiaHornOffset1[LEGI]))
-#else   // Fixed per leg, if not defined 0
-#ifndef cTibiaHornOffset1
-#define cTibiaHornOffset1  0
-#endif
-#define CTIBIAHORNOFFSET1(LEGI)  (cTibiaHornOffset1)
-#endif
-
-#ifdef c4DOF
-#ifdef cRRTarsHornOffset1   // per leg configuration
-static const short cTarsHornOffset1[] PROGMEM = {
-  cRRTarsHornOffset1,  cRMTarsHornOffset1,  cRFTarsHornOffset1,  cLRTarsHornOffset1,  cLMTarsHornOffset1,  cLFTarsHornOffset1};
-#define CTARSHORNOFFSET1(LEGI) ((short)pgm_read_word(&cTarsHornOffset1[LEGI]))
-#else   // Fixed per leg, if not defined 0
-#ifndef cTarsHornOffset1
-#define cTarsHornOffset1  0
-#endif
-#define CTARSHORNOFFSET1(LEGI)  cTarsHornOffset1
-#endif
-#endif
-
 //Min / Max values
 #ifndef SERVOS_DO_MINMAX
 const short cCoxaMin1[] PROGMEM = {
@@ -227,12 +189,6 @@ const short cTibiaMin1[] PROGMEM ={
 const short cTibiaMax1[] PROGMEM = {
   cRRTibiaMax1, cRMTibiaMax1, cRFTibiaMax1, cLRTibiaMax1, cLMTibiaMax1, cLFTibiaMax1};
 
-#ifdef c4DOF
-const short cTarsMin1[] PROGMEM = {
-  cRRTarsMin1, cRMTarsMin1, cRFTarsMin1, cLRTarsMin1, cLMTarsMin1, cLFTarsMin1};
-const short cTarsMax1[] PROGMEM = {
-  cRRTarsMax1, cRMTarsMax1, cRFTarsMax1, cLRTarsMax1, cLMTarsMax1, cLFTarsMax1};
-#endif
 #endif
 
 // Servo inverse direction
@@ -240,9 +196,6 @@ const bool cCoxaInv[] = {cRRCoxaInv, cRMCoxaInv, cRFCoxaInv, cLRCoxaInv, cLMCoxa
 bool cFemurInv[] = {cRRFemurInv, cRMFemurInv, cRFFemurInv, cLRFemurInv, cLMFemurInv, cLFFemurInv};
 const bool cTibiaInv[] = {cRRTibiaInv, cRMTibiaInv, cRFTibiaInv, cLRTibiaInv, cLMTibiaInv, cLFTibiaInv};
 
-#ifdef c4DOF
-const boolean cTarsInv[] = {cRRTarsInv, cRMTarsInv, cRFTarsInv, cLRTarsInv, cLMTarsInv, cLFTarsInv};
-#endif	
 
 //Leg Lengths
 const byte cCoxaLength[] PROGMEM = {
@@ -251,10 +204,6 @@ const byte cFemurLength[] PROGMEM = {
   cRRFemurLength, cRMFemurLength, cRFFemurLength, cLRFemurLength, cLMFemurLength, cLFFemurLength};
 const byte cTibiaLength[] PROGMEM = {
   cRRTibiaLength, cRMTibiaLength, cRFTibiaLength, cLRTibiaLength, cLMTibiaLength, cLFTibiaLength};
-#ifdef c4DOF
-const byte cTarsLength[] PROGMEM = {
-  cRRTarsLength, cRMTarsLength, cRFTarsLength, cLRTarsLength, cLMTarsLength, cLFTarsLength};
-#endif
 
 
 //Body Offsets [distance between the center of the body and the center of the coxa]
@@ -282,44 +231,9 @@ const short cInitPosZ[] PROGMEM = {
 
 //=============================================================================
 #else
-// Quads...
-// Servo Horn offsets
-#ifdef cRRFemurHornOffset1   // per leg configuration
-static const short cFemurHornOffset1[] PROGMEM = {
-  cRRFemurHornOffset1, cRFFemurHornOffset1, cLRFemurHornOffset1, cLFFemurHornOffset1};
-#define CFEMURHORNOFFSET1(LEGI) ((short)pgm_read_word(&cFemurHornOffset1[LEGI]))
-#else   // Fixed per leg, if not defined 0
-#ifndef cFemurHornOffset1
-#define cFemurHornOffset1  0
-#endif
-#define CFEMURHORNOFFSET1(LEGI)  (cFemurHornOffset1)
-#endif
-
-#ifdef cRRTibiaHornOffset1   // per leg configuration
-static const short cTibiaHornOffset1[] PROGMEM = {
-  cRRTibiaHornOffset1, cRFTibiaHornOffset1, cLRTibiaHornOffset1, cLFTibiaHornOffset1};
-#define CTIBIAHORNOFFSET1(LEGI) ((short)pgm_read_word(&cTibiaHornOffset1[LEGI]))
-#else   // Fixed per leg, if not defined 0
-#ifndef cTibiaHornOffset1
-#define cTibiaHornOffset1  0
-#endif
-#define CTIBIAHORNOFFSET1(LEGI)  (cTibiaHornOffset1)
-#endif
 
 
 
-#ifdef c4DOF
-#ifdef cRRTarsHornOffset1   // per leg configuration
-static const short cTarsHornOffset1[] PROGMEM = {
-  cRRTarsHornOffset1, cRFTarsHornOffset1,  cLRTarsHornOffset1, cLFTarsHornOffset1};
-#define CTARSHORNOFFSET1(LEGI) ((short)pgm_read_word(&cTarsHornOffset1[LEGI]))
-#else   // Fixed per leg, if not defined 0
-#ifndef cTarsHornOffset1
-#define cTarsHornOffset1  0
-#endif
-#define CTARSHORNOFFSET1(LEGI)  cTarsHornOffset1
-#endif
-#endif
 
 //Min / Max values
 #ifndef SERVOS_DO_MINMAX
@@ -336,12 +250,6 @@ const short cTibiaMin1[] PROGMEM ={
 const short cTibiaMax1[] PROGMEM = {
   cRRTibiaMax1, cRFTibiaMax1, cLRTibiaMax1, cLFTibiaMax1};
 
-#ifdef c4DOF
-const short cTarsMin1[] PROGMEM = {
-  cRRTarsMin1, cRFTarsMin1, cLRTarsMin1, cLFTarsMin1};
-const short cTarsMax1[] PROGMEM = {
-  cRRTarsMax1, cRFTarsMax1, cLRTarsMax1, cLFTarsMax1};
-#endif
 #endif
 
 // Servo inverse direction
@@ -349,10 +257,6 @@ const bool cCoxaInv[] = {cRRCoxaInv, cRFCoxaInv, cLRCoxaInv, cLFCoxaInv};
 bool cFemurInv[] = {cRRFemurInv, cRFFemurInv, cLRFemurInv, cLFFemurInv};
 const bool cTibiaInv[] = {cRRTibiaInv, cRFTibiaInv, cLRTibiaInv, cLFTibiaInv};
 
-#ifdef c4DOF
-const boolean cTarsInv[] = {
-	cRRTarsInv, cRFTarsInv, cLRTarsInv, cLFTarsInv};
-#endif	
 	
 
 
@@ -363,10 +267,6 @@ const byte cFemurLength[] PROGMEM = {
   cRRFemurLength, cRFFemurLength, cLRFemurLength, cLFFemurLength};
 const byte cTibiaLength[] PROGMEM = {
   cRRTibiaLength, cRFTibiaLength, cLRTibiaLength, cLFTibiaLength};
-#ifdef c4DOF
-const byte cTarsLength[] PROGMEM = {
-  cRRTarsLength, cRFTarsLength, cLRTarsLength, cLFTarsLength};
-#endif
 
 
 //Body Offsets [distance between the center of the body and the center of the coxa]
@@ -393,8 +293,6 @@ const short cInitPosY[] PROGMEM = {
 const short cInitPosZ[] PROGMEM = {
   cRRInitPosZ, cRFInitPosZ, cLRInitPosZ, cLFInitPosZ};
 
-#endif
-
 // Define some globals for debug information
 boolean g_fShowDebugPrompt;
 boolean g_fDebugOutput;
@@ -408,9 +306,6 @@ boolean g_fEnableServos = true;
 short           CoxaAngle1[CNT_LEGS];    //Actual Angle of the horizontal hip, decimals = 1
 short           FemurAngle1[CNT_LEGS];   //Actual Angle of the vertical hip, decimals = 1
 short           TibiaAngle1[CNT_LEGS];   //Actual Angle of the knee, decimals = 1
-#ifdef c4DOF
-short           TarsAngle1[CNT_LEGS];	  //Actual Angle of the knee, decimals = 1
-#endif
 
 //--------------------------------------------------------------------
 //[POSITIONS SINGLE LEG CONTROL]
@@ -528,7 +423,6 @@ boolean        fRobotUpsideDownPrev;
 //cRR=0, cRF, cLR, cLF, CNT_LEGS};
 
 #ifndef OVERWRITE_GAITS
-#ifndef QUADMODE
 //  Speed, Steps, Lifted, Front Down, Lifted Factor, Half Height, On Ground, 
 //     Quad extra: COGAngleStart, COGAngleStep, CogRadius, COGCCW
 //                      { RR, <RM> RF, LR, <LM>, LF}
@@ -566,7 +460,6 @@ PHOENIXGAIT APG[] = {
     {1, 28, 3, 2, 2, 24, 3, 2250, 3600/28, 30, true, {8, 15, 1, 22} GAITNAME(s_szGN2)}                             // Wave 28?
 };    
 
-#endif
 #endif
 //--------------------------------------------------------------------
 
@@ -667,30 +560,12 @@ void setup(){
   g_InControlState.GaitStep = 1;
   GaitSelect();
 
-#ifdef cTurretRotPin
-  g_InControlState.TurretRotAngle1 = cTurretRotInit;      // Rotation of turrent in 10ths of degree
-  g_InControlState.TurretTiltAngle1 = cTurretTiltInit;    // the tile for the turret
-#endif
-
   g_InputController.Init();
 
   // Servo Driver
   ServoMoveTime = 150;
   g_InControlState.fRobotOn = 0;
   g_fLowVoltageShutdown = false;
-#ifdef DEBUG_IOPINS    
-  //  pinMode(A0, OUTPUT);
-  pinMode(A1, OUTPUT);
-  pinMode(A2, OUTPUT);
-  pinMode(A3, OUTPUT);
-  pinMode(A4, OUTPUT);
-#endif    
-#ifdef OPT_WALK_UPSIDE_DOWN
-  g_fRobotUpsideDown = false; //Assume off... 
-#ifdef DBGSerial  
-  DBGSerial.println(IsRobotUpsideDown, DEC);
-#endif  
-#endif
 
 }
 
@@ -714,31 +589,6 @@ void loop(void)
     //    DebugWrite(A0, LOW);
   }
   WriteOutputs();        // Write Outputs
-
-#ifdef IsRobotUpsideDown
-    if (!fWalking){// dont do this while walking
-    g_fRobotUpsideDown = IsRobotUpsideDown;    // Grab the current state of the robot... 
-    if (g_fRobotUpsideDown != fRobotUpsideDownPrev) {
-      // Double check to make sure that it was not a one shot error
-      g_fRobotUpsideDown = IsRobotUpsideDown;    // Grab the current state of the robot... 
-      if (g_fRobotUpsideDown != fRobotUpsideDownPrev) {
-        fRobotUpsideDownPrev = g_fRobotUpsideDown;
-#ifdef DGBSerial        
-        DBGSerial.println(fRobotUpsideDownPrev, DEC);
-#endif        
-      }
-    }
-  }
-  //  DBGSerial.println(analogRead(0), DEC);
-#endif
-#ifdef OPT_WALK_UPSIDE_DOWN
-  if (g_fRobotUpsideDown){
-    g_InControlState.TravelLength.x = -g_InControlState.TravelLength.x;
-    g_InControlState.BodyPos.x = -g_InControlState.BodyPos.x;
-    g_InControlState.SLLeg.x = -g_InControlState.SLLeg.x;
-    g_InControlState.BodyRot1.z = -g_InControlState.BodyRot1.z;
-  }
-#endif
 
 #ifdef OPT_GPPLAYER
     //GP Player
@@ -833,13 +683,6 @@ void loop(void)
     LegPosY[LegIndex]+g_InControlState.BodyPos.y-BodyFKPosY+GaitPosY[LegIndex] - TotalTransY,
     LegPosZ[LegIndex]+g_InControlState.BodyPos.z-BodyFKPosZ+GaitPosZ[LegIndex] - TotalTransZ, LegIndex);
   }
-#ifdef OPT_WALK_UPSIDE_DOWN
-  if (g_fRobotUpsideDown){ //Need to set them back for not messing with the SmoothControl
-    g_InControlState.BodyPos.x = -g_InControlState.BodyPos.x;
-    g_InControlState.SLLeg.x = -g_InControlState.SLLeg.x;
-    g_InControlState.BodyRot1.z = -g_InControlState.BodyRot1.z;
-  }
-#endif
   //Check mechanical limits
   CheckAngles();
 
@@ -851,9 +694,6 @@ void loop(void)
   if (g_InControlState.fRobotOn) {
     if (g_InControlState.fRobotOn && !g_InControlState.fPrev_RobotOn) {
       MSound(3, 60, 2000, 80, 2250, 100, 2500);
-#ifdef USEXBEE
-      XBeePlaySounds(3, 60, 2000, 80, 2250, 100, 2500);
-#endif            
 
       Eyes = 1;
     }
@@ -945,9 +785,6 @@ void loop(void)
       StartUpdateServos();
       g_ServoDriver.CommitServoDriver(ServoMoveTime);
       MSound(3, 100, 2500, 80, 2250, 60, 2000);
-#ifdef USEXBEE            
-      XBeePlaySounds(3, 100, 2500, 80, 2250, 60, 2000);
-#endif    
       lTimeWaitEnd = millis() + 600;    // setup to process background stuff while we wait...
       do {
         // Wait the appropriate time, call any background process while waiting...
@@ -991,22 +828,11 @@ void StartUpdateServos()
   g_ServoDriver.BeginServoUpdate();    // Start the update 
 
     for (LegIndex = 0; LegIndex < CNT_LEGS; LegIndex++) {
-#ifdef c4DOF
-    g_ServoDriver.OutputServoInfoForLeg(LegIndex, 
-        cCoxaInv[LegIndex]? -CoxaAngle1[LegIndex] : CoxaAngle1[LegIndex], 
-        cFemurInv[LegIndex]? -FemurAngle1[LegIndex] : FemurAngle1[LegIndex], 
-        cTibiaInv[LegIndex]? -TibiaAngle1[LegIndex] : TibiaAngle1[LegIndex], 
-        cTarsInv[LegIndex]? -TarsAngle1[LegIndex] : TarsAngle1[LegIndex]);
-#else
     g_ServoDriver.OutputServoInfoForLeg(LegIndex, 
         cCoxaInv[LegIndex]? -CoxaAngle1[LegIndex] : CoxaAngle1[LegIndex], 
         cFemurInv[LegIndex]? -FemurAngle1[LegIndex] : FemurAngle1[LegIndex], 
         cTibiaInv[LegIndex]? -TibiaAngle1[LegIndex] : TibiaAngle1[LegIndex]);
-#endif      
   }
-#ifdef cTurretRotPin
-  g_ServoDriver.OutputServoInfoForTurret(g_InControlState.TurretRotAngle1, g_InControlState.TurretTiltAngle1);  // fist just see if it will talk
-#endif  
 }
 
 
@@ -1093,13 +919,11 @@ void SingleLegControl(void)
 
   //Check if all legs are down
   AllDown = (LegPosY[cRF]==(short)pgm_read_word(&cInitPosY[cRF])) && 
-    (LegPosY[cRR]==(short)pgm_read_word(&cInitPosY[cRR])) && 
-    (LegPosY[cLR]==(short)pgm_read_word(&cInitPosY[cLR])) && 
-#ifndef QUADMODE
-    (LegPosY[cRM]==(short)pgm_read_word(&cInitPosY[cRM])) && 
-    (LegPosY[cLM]==(short)pgm_read_word(&cInitPosY[cLM])) && 
-#endif	
-    (LegPosY[cLF]==(short)pgm_read_word(&cInitPosY[cLF]));
+            (LegPosY[cRR]==(short)pgm_read_word(&cInitPosY[cRR])) && 
+            (LegPosY[cLR]==(short)pgm_read_word(&cInitPosY[cLR])) && 
+            (LegPosY[cRM]==(short)pgm_read_word(&cInitPosY[cRM])) && 
+            (LegPosY[cLM]==(short)pgm_read_word(&cInitPosY[cLM])) && 
+            (LegPosY[cLF]==(short)pgm_read_word(&cInitPosY[cLF]));
 
   if (g_InControlState.SelectedLeg<= (CNT_LEGS-1)) {
     if (g_InControlState.SelectedLeg!=PrevSelectedLeg) {
@@ -1309,10 +1133,6 @@ void BalCalcOneLeg (long PosX, long PosZ, long PosY, byte BalLegNr)
   long            CPR_Y;            //Final Y value for centerpoint of rotation
   long            CPR_Z;            //Final Z value for centerpoint of rotation
 
-
-#ifdef QUADMODE
-  if (g_InControlState.gaitCur.COGAngleStep1 == 0) {  // In Quad mode only do those for those who don't support COG Balance...
-#endif
       long             lAtan;
       //Calculating totals from center of the body to the feet
       CPR_Z = (short)pgm_read_word(&cOffsetZ[BalLegNr]) + PosZ;
@@ -1344,28 +1164,19 @@ void BalCalcOneLeg (long PosX, long PosZ, long PosY, byte BalLegNr)
       lAtan = GetATan2 (CPR_Z, CPR_Y);
       TotalXBal1 += ((lAtan*1800) / 31415) - 900; //Rotate balance circle 90 deg
 
-#ifdef QUADMODE
-    }
-#endif  
-
 }  
 //--------------------------------------------------------------------
 //[BalanceBody]
 void BalanceBody(void)
 {
-#ifdef QUADMODE
-  if (g_InControlState.gaitCur.COGAngleStep1 == 0) {  // In Quad mode only do those for those who don't support COG Balance...
-#endif
       TotalTransZ = TotalTransZ/BalanceDivFactor ;
       TotalTransX = TotalTransX/BalanceDivFactor;
       TotalTransY = TotalTransY/BalanceDivFactor;
 
-#ifndef QUADMODE // ??? on PhantomX Hex at no movment YBal1 = 1800, on Quad = 0...  Need to experiment
       if (TotalYBal1 > 0)        //Rotate balance circle by +/- 180 deg
         TotalYBal1 -=  1800;
       else
         TotalYBal1 += 1800;
-#endif        
 
       if (TotalZBal1 < -1800)    //Compensate for extreme balance positions that causes overflow
         TotalZBal1 += 3600;
@@ -1395,64 +1206,6 @@ void BalanceBody(void)
           DBGSerial.println(TotalZBal1, DEC);
       }
 #endif
-#ifdef QUADMODE
-  } else {  
-    // Quad mode with COG balance mode...
-      byte COGShiftNeeded;
-      byte BalCOGTransX;
-      byte BalCOGTransZ;
-      word COGAngle1;
-      long BalTotTravelLength;
-
-      COGShiftNeeded = TravelRequest;
-      for (LegIndex = 0; LegIndex <= CNT_LEGS; LegIndex++)
-      {
-        // Check if the cog needs to be shifted (travelRequest or legs goto home.)
-        COGShiftNeeded = COGShiftNeeded || (abs(GaitPosX[LegIndex])>2) || (abs(GaitPosZ[LegIndex])>2) || (abs(GaitRotY[LegIndex])>2);
-      }
-
-      if (COGShiftNeeded) {
-        if (g_InControlState.gaitCur.COGCCW) {
-          COGAngle1 = g_InControlState.gaitCur.COGAngleStart1 - (g_InControlState.GaitStep-1) * g_InControlState.gaitCur.COGAngleStep1;
-        } else {
-          COGAngle1 = g_InControlState.gaitCur.COGAngleStart1 + (g_InControlState.GaitStep-1) * g_InControlState.gaitCur.COGAngleStep1;
-        }
-        GetSinCos(COGAngle1);
-        TotalTransX = (long)g_InControlState.gaitCur.COGRadius * (long)sin4 / c4DEC;
-        TotalTransZ = (long)g_InControlState.gaitCur.COGRadius * (long)cos4 / c4DEC;
-	
-#ifdef DEBUG
-        if (g_fDebugOutput) {
-          DBGSerial.print(" TotalTransX: ");
-          DBGSerial.print(TotalTransX, DEC);
-          DBGSerial.print(" TotalTransZ: ");
-          DBGSerial.print(TotalTransZ, DEC);
-        }
-#endif
-        // Add direction variable. The body will not shift in the direction you're walking
-        if (((abs(g_InControlState.TravelLength.x)>cTravelDeadZone) || (abs(g_InControlState.TravelLength.z)>cTravelDeadZone)) && (abs(g_InControlState.TravelLength.y)<=cTravelDeadZone) ) {
-        //if(TravelRotationY = 0) then
-
-          BalTotTravelLength = isqrt32(abs(g_InControlState.TravelLength.x * g_InControlState.TravelLength.x) + abs(g_InControlState.TravelLength.z*g_InControlState.TravelLength.z));
-          BalCOGTransX = abs(g_InControlState.TravelLength.z)*c2DEC/BalTotTravelLength;
-          BalCOGTransZ = abs(g_InControlState.TravelLength.x)*c2DEC/BalTotTravelLength;
-          TotalTransX = TotalTransX*BalCOGTransX/c2DEC;
-          TotalTransZ = TotalTransZ*BalCOGTransZ/c2DEC;
-        }
-  
-#ifdef DEBUG
-        if (g_fDebugOutput) {
-          DBGSerial.print(" COGRadius: ");
-          DBGSerial.print(g_InControlState.gaitCur.COGRadius, DEC);
-          DBGSerial.print(" TotalTransX: ");
-          DBGSerial.print(TotalTransX, DEC);
-          DBGSerial.print(" TotalTransZ: ");
-          DBGSerial.println(TotalTransZ, DEC);
-        }
-#endif
-      }  
-  } 
-#endif  
 }
 //--------------------------------------------------------------------
 //[GETSINCOS] Get the sinus and cosinus from the angle +/- multiple circles
@@ -1630,14 +1383,6 @@ void BodyFK (short PosX, short PosZ, short PosY, short RotationY, byte BodyIKLeg
   SinB4 = sin4;
   CosB4 = cos4;
 
-#ifdef OPT_WALK_UPSIDE_DOWN
-  if (g_fRobotUpsideDown)
-    GetSinCos (-g_InControlState.BodyRot1.y+(-RotationY*c1DEC)+TotalYBal1) ;
-  else
-    GetSinCos (g_InControlState.BodyRot1.y+(RotationY*c1DEC)+TotalYBal1) ;
-#else
-  GetSinCos (g_InControlState.BodyRot1.y+(RotationY*c1DEC)+TotalYBal1) ;
-#endif
   SinA4 = sin4;
   CosA4 = cos4;
 
@@ -1672,18 +1417,9 @@ void LegIK (short IKFeetPosX, short IKFeetPosY, short IKFeetPosZ, byte LegIKLegN
   unsigned long    IKA14;            //Angle of the line S>W with respect to the ground in radians, decimals = 4
   unsigned long    IKA24;            //Angle of the line S>W with respect to the femur in radians, decimals = 4
   short            IKFeetPosXZ;    //Diagonal direction from Input X and Z
-#ifdef c4DOF
-  // these were shorts...
-  long            TarsOffsetXZ;    //Vector value \ ;
-  long            TarsOffsetY;     //Vector value / The 2 DOF IK calcs (femur and tibia) are based upon these vectors
-  long            TarsToGroundAngle1;    //Angle between tars and ground. Note: the angle are 0 when the tars are perpendicular to the ground
-  long            TGA_A_H4;
-  long            TGA_B_H3;
-#else
+
 #define TarsOffsetXZ 0		// Vector value
 #define TarsOffsetY  0		//Vector value / The 2 DOF IK calcs (femur and tibia) are based upon these vectors
-#endif
-
 
   long            Temp1;            
   long            Temp2;            
@@ -1695,40 +1431,6 @@ void LegIK (short IKFeetPosX, short IKFeetPosY, short IKFeetPosZ, byte LegIKLegN
 
   //Length between the Coxa and tars [foot]
   IKFeetPosXZ = XYhyp2/c2DEC;
-#ifdef c4DOF
-  // Some legs may have the 4th DOF and some may not, so handle this here...
-  //Calc the TarsToGroundAngle1:
-  if ((byte)pgm_read_byte(&cTarsLength[LegIKLegNr])) {    // We allow mix of 3 and 4 DOF legs...
-    TarsToGroundAngle1 = -cTarsConst + cTarsMulti*IKFeetPosY + ((long)(IKFeetPosXZ*cTarsFactorA))/c1DEC - ((long)(IKFeetPosXZ*IKFeetPosY)/(cTarsFactorB));
-    if (IKFeetPosY < 0)     //Always compensate TarsToGroundAngle1 when IKFeetPosY it goes below zero
-      TarsToGroundAngle1 = TarsToGroundAngle1 - ((long)(IKFeetPosY*cTarsFactorC)/c1DEC);     //TGA base, overall rule
-    if (TarsToGroundAngle1 > 400)
-      TGA_B_H3 = 200 + (TarsToGroundAngle1/2);
-    else
-      TGA_B_H3 = TarsToGroundAngle1;
-
-    if (TarsToGroundAngle1 > 300)
-      TGA_A_H4 = 240 + (TarsToGroundAngle1/5);
-    else
-      TGA_A_H4 = TarsToGroundAngle1;
-
-    if (IKFeetPosY > 0)    //Only compensate the TarsToGroundAngle1 when it exceed 30 deg (A, H4 PEP note)
-      TarsToGroundAngle1 = TGA_A_H4;
-    else if (((IKFeetPosY <= 0) & (IKFeetPosY > -10))) // linear transition between case H3 and H4 (from PEP: H4-K5*(H3-H4))
-      TarsToGroundAngle1 = (TGA_A_H4 -(((long)IKFeetPosY*(TGA_B_H3-TGA_A_H4))/c1DEC));
-    else                //IKFeetPosY <= -10, Only compensate TGA1 when it exceed 40 deg
-    TarsToGroundAngle1 = TGA_B_H3;
-
-    //Calc Tars Offsets:
-    GetSinCos(TarsToGroundAngle1);
-    TarsOffsetXZ = ((long)sin4*(byte)pgm_read_byte(&cTarsLength[LegIKLegNr]))/c4DEC;
-    TarsOffsetY = ((long)cos4*(byte)pgm_read_byte(&cTarsLength[LegIKLegNr]))/c4DEC;
-  } 
-  else {
-    TarsOffsetXZ = 0;
-    TarsOffsetY = 0;
-  }
-#endif
 
   //Using GetAtan2 for solving IKA1 and IKSW
   //IKA14 - Angle between SW line and the ground in radians
@@ -1758,15 +1460,6 @@ void LegIK (short IKFeetPosX, short IKFeetPosY, short IKFeetPosZ, byte LegIKLegN
         DBGSerial.print(IKA24, DEC);
     }
 #endif
-  //IKFemurAngle
-#ifdef OPT_WALK_UPSIDE_DOWN
-  if (g_fRobotUpsideDown)
-    FemurAngle1[LegIKLegNr] = (long)(IKA14 + IKA24) * 180 / 3141 - 900 + CFEMURHORNOFFSET1(LegIKLegNr);//Inverted, up side down
-  else
-    FemurAngle1[LegIKLegNr] = -(long)(IKA14 + IKA24) * 180 / 3141 + 900 + CFEMURHORNOFFSET1(LegIKLegNr);//Normal
-#else
-  FemurAngle1[LegIKLegNr] = -(long)(IKA14 + IKA24) * 180 / 3141 + 900 + CFEMURHORNOFFSET1(LegIKLegNr);//Normal
-#endif  
 
   //IKTibiaAngle
   Temp1 = ((((long)(byte)pgm_read_byte(&cFemurLength[LegIKLegNr])*(byte)pgm_read_byte(&cFemurLength[LegIKLegNr])) + ((long)(byte)pgm_read_byte(&cTibiaLength[LegIKLegNr])*(byte)pgm_read_byte(&cTibiaLength[LegIKLegNr])))*c4DEC - ((long)IKSW2*IKSW2));
@@ -1783,27 +1476,6 @@ void LegIK (short IKFeetPosX, short IKFeetPosY, short IKFeetPosZ, byte LegIKLegN
     }
 #endif
     
-#ifdef OPT_WALK_UPSIDE_DOWN
-  if (g_fRobotUpsideDown)
-    TibiaAngle1[LegIKLegNr] = (1800-(long)AngleRad4*180/3141 + CTIBIAHORNOFFSET1(LegIKLegNr));//Full range tibia, wrong side (up side down)
-  else
-    TibiaAngle1[LegIKLegNr] = -(1800-(long)AngleRad4*180/3141 + CTIBIAHORNOFFSET1(LegIKLegNr));//Full range tibia, right side (up side up)
-#else
-#ifdef PHANTOMX_V2     // BugBug:: cleaner way?  
-    TibiaAngle1[LegIKLegNr] = -(1450-(long)AngleRad4*180/3141 + CTIBIAHORNOFFSET1(LegIKLegNr)); //!!!!!!!!!!!!145 instead of 1800  
-#else  
-    TibiaAngle1[LegIKLegNr] = -(900-(long)AngleRad4*180/3141 + CTIBIAHORNOFFSET1(LegIKLegNr));
-#endif
-#endif
-
-#ifdef c4DOF
-  //Tars angle
-  if ((byte)pgm_read_byte(&cTarsLength[LegIKLegNr])) {    // We allow mix of 3 and 4 DOF legs...
-    TarsAngle1[LegIKLegNr] = (TarsToGroundAngle1 + FemurAngle1[LegIKLegNr] - TibiaAngle1[LegIKLegNr]) 
-      + CTARSHORNOFFSET1(LegIKLegNr);
-  }
-#endif
-
   //Set the Solution quality    
   if(IKSW2 < ((word)((byte)pgm_read_byte(&cFemurLength[LegIKLegNr])+(byte)pgm_read_byte(&cTibiaLength[LegIKLegNr])-30)*c2DEC))
     IKSolution = 1;
@@ -1886,11 +1558,6 @@ void CheckAngles(void)
     CoxaAngle1[LegIndex]  = CheckServoAngleBounds(s++, CoxaAngle1[LegIndex], &cCoxaMin1[LegIndex], &cCoxaMax1[LegIndex]);
     FemurAngle1[LegIndex] = CheckServoAngleBounds(s++, FemurAngle1[LegIndex], &cFemurMin1[LegIndex], &cFemurMax1[LegIndex]);
     TibiaAngle1[LegIndex] = CheckServoAngleBounds(s++, TibiaAngle1[LegIndex], &cTibiaMin1[LegIndex], &cTibiaMax1[LegIndex]);
-#ifdef c4DOF
-    if ((byte)pgm_read_byte(&cTarsLength[LegIndex])) {    // We allow mix of 3 and 4 DOF legs...
-      TarsAngle1[LegIndex] = CheckServoAngleBounds(s++, TarsAngle1[LegIndex], &cTarsMin1[LegIndex], &cTarsMax1[LegIndex]);
-    }
-#endif
   }
 #endif  
 }
@@ -2167,9 +1834,6 @@ void MSound(byte cNotes, ...)
 #ifdef OPT_DUMP_EEPROM
 extern void DumpEEPROMCmd(byte *pszCmdLine);
 #endif
-#ifdef QUADMODE
-extern void UpdateGaitCmd(byte *pszCmdLine);
-#endif
 #ifdef OPT_DYNAMIC_ADJUST_LEGS
 extern void UpdateInitialPosAndAngCmd(byte *pszCmdLine);
 #endif
@@ -2189,10 +1853,6 @@ boolean TerminalMonitor(void)
     DBGSerial.println(F("D - Toggle debug on or off"));
 #ifdef OPT_DUMP_EEPROM
     DBGSerial.println(F("E - Dump EEPROM"));
-#endif
-#ifdef QUADMODE
-//	DBGSerial.println(F("B <percent>"));
-	DBGSerial.println(F("G ST NL RR RF LR LF"));
 #endif
 #ifdef OPT_DYNAMIC_ADJUST_LEGS
     DBGSerial.println(F("I pos ang"));
@@ -2246,11 +1906,6 @@ boolean TerminalMonitor(void)
 #ifdef OPT_DUMP_EEPROM
     else if (((szCmdLine[0] == 'e') || (szCmdLine[0] == 'E'))) {
       DumpEEPROMCmd(szCmdLine);
-    } 
-#endif
-#ifdef QUADMODE
-    else if (((szCmdLine[0] == 'g') || (szCmdLine[0] == 'G'))) {
-      UpdateGaitCmd(szCmdLine);
     } 
 #endif
 #ifdef OPT_DYNAMIC_ADJUST_LEGS
@@ -2399,65 +2054,6 @@ void DumpEEPROMCmd(byte *pszCmdLine) {
 }
 #endif
 
-#ifdef QUADMODE
-//--------------------------------------------------------------------
-// UpdateGaitCmd
-//--------------------------------------------------------------------
-void UpdateGaitCmd(byte *pszCmdLine) {
-  // If no other parameters, show current state
-  if (!*++pszCmdLine) {  // Need to get past the command letter first...
-	DBGSerial.print("St: ");
-	DBGSerial.print(g_InControlState.gaitCur.StepsInGait, DEC);
-	DBGSerial.print(" ");
-	DBGSerial.print(g_InControlState.gaitCur.NrLiftedPos, DEC);
-	DBGSerial.print(" ");
-	DBGSerial.print(g_InControlState.gaitCur.GaitLegNr[cRR], DEC);
-	DBGSerial.print(" ");
-	DBGSerial.print(g_InControlState.gaitCur.GaitLegNr[cRF], DEC);
-	DBGSerial.print(" ");
-	DBGSerial.print(g_InControlState.gaitCur.GaitLegNr[cLR], DEC);
-	DBGSerial.print(" ");
-	DBGSerial.println(g_InControlState.gaitCur.GaitLegNr[cLF], DEC);
-  }
-  else {
-	//Argument should be New percentage
-    word wStepsInGait = GetCmdLineNum(&pszCmdLine);
-	word wLifted = GetCmdLineNum(&pszCmdLine);
-	
-	// first pass only pass in number of steps and maybe Lifted pos
-	if (wStepsInGait) {
-		if (wLifted) {
-			// UPdated the lifted so lets update some of the gait properties
-			g_InControlState.gaitCur.NrLiftedPos = wLifted;
-			g_InControlState.gaitCur.FrontDownPos = (wLifted+1)/2;
-			g_InControlState.gaitCur.LiftDivFactor = (wLifted > 4)? 4 : 2;
-		}
-
-		// Assume the ordering of the gait legs here and equal spaced
-		g_InControlState.gaitCur.StepsInGait = wStepsInGait;
-		g_InControlState.gaitCur.TLDivFactor = g_InControlState.gaitCur.StepsInGait-g_InControlState.gaitCur.NrLiftedPos;
-			
-		// See if user did pass in leg positions...
-		g_InControlState.gaitCur.GaitLegNr[cRR] = GetCmdLineNum(&pszCmdLine);
-		if (g_InControlState.gaitCur.GaitLegNr[cRR]) {
-			g_InControlState.gaitCur.GaitLegNr[cRF] = GetCmdLineNum(&pszCmdLine);
-			g_InControlState.gaitCur.GaitLegNr[cLR] = GetCmdLineNum(&pszCmdLine);
-			g_InControlState.gaitCur.GaitLegNr[cLF] = GetCmdLineNum(&pszCmdLine);
-		}
-		else {
-			wStepsInGait /= 4;	// equal spacing.
-			g_InControlState.gaitCur.GaitLegNr[cRR] = wStepsInGait / 2;
-			g_InControlState.gaitCur.GaitLegNr[cRF] = g_InControlState.gaitCur.GaitLegNr[cRR] + wStepsInGait;
-			g_InControlState.gaitCur.GaitLegNr[cLR] = g_InControlState.gaitCur.GaitLegNr[cRF] + wStepsInGait;
-			g_InControlState.gaitCur.GaitLegNr[cLF] = g_InControlState.gaitCur.GaitLegNr[cLR] + wStepsInGait;
-		}
-	
-		//g_InControlState.gaitCur.HalfLiftHeight = 3;
-		//g_InControlState.gaitCur.NomGaitSpeed = DEFAULT_GAIT_SPEED;
-	}	
-  }
-}
-#endif //Quad Mode
 
 //--------------------------------------------------------------------
 // UpdateGaitCmd
