@@ -1,0 +1,2 @@
+source C:/work/esp-idf/Phoenix_Hexapod_ESP32/build/gdbinit/symbols
+source C:/work/esp-idf/Phoenix_Hexapod_ESP32/build/gdbinit/connect

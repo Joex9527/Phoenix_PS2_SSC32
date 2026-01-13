@@ -1,0 +1,11 @@
+idf_component_register(
+    SRCS
+        "src/Phoenix.cpp"
+        "src/Gait.cpp"
+        "src/IK.cpp"
+        "src/platform.cpp"
+    INCLUDE_DIRS
+        "inc"
+    REQUIRES
+        esp_timer
+)
