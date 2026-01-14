@@ -6,6 +6,7 @@ idf_component_register(
         "src/platform.cpp"
     INCLUDE_DIRS
         "inc"
-    REQUIRES
+    PRIV_REQUIRES
         esp_timer
+        freertos
 )

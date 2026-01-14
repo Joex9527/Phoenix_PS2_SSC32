@@ -9,6 +9,6 @@ extern "C" void app_main(void)
     while (1)
     {
         PhoenixLoop();
-        vTaskDelay(pdMS_TO_TICKS(5));
+        platform_delay(5);
     }
 }
