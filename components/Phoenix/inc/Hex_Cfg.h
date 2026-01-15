@@ -39,3 +39,26 @@
 /* ================= 调试 ================= */
 
 #define PHOENIX_DEBUG       1
+
+
+/* ================ PCA9685寄存器 ================ */
+
+#define PCA9685_MODE1      0x00
+#define PCA9685_PRESCALE   0xFE
+
+#define LED0_ON_L          0x06
+#define LED0_ON_H          0x07
+#define LED0_OFF_L         0x08
+#define LED0_OFF_H         0x09
+
+#define ALL_LED_ON_L       0xFA
+#define ALL_LED_ON_H       0xFB
+#define ALL_LED_OFF_L      0xFC
+#define ALL_LED_OFF_H      0xFD
+
+/* =================== I2C 配置 ==================== */
+
+#define I2C_PORT_NUM      0
+#define I2C_SDA_GPIO      8
+#define I2C_SCL_GPIO      9
+#define I2C_FREQ_HZ       400000    // 400kHz
