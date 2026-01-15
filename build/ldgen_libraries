@@ -160,4 +160,5 @@ C:/work/esp-idf/Phoenix_Hexapod_ESP32/build/esp-idf/usb/libusb.a
 C:/work/esp-idf/Phoenix_Hexapod_ESP32/build/esp-idf/wifi_provisioning/libwifi_provisioning.a
 C:/work/esp-idf/Phoenix_Hexapod_ESP32/build/esp-idf/json/libjson.a
 C:/work/esp-idf/Phoenix_Hexapod_ESP32/build/esp-idf/main/libmain.a
+C:/work/esp-idf/Phoenix_Hexapod_ESP32/build/esp-idf/PCA9685/libPCA9685.a
 C:/work/esp-idf/Phoenix_Hexapod_ESP32/build/esp-idf/Phoenix/libPhoenix.a

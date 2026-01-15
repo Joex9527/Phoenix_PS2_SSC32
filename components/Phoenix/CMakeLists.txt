@@ -1,9 +1,9 @@
 idf_component_register(
     SRCS
-        "src/Phoenix.cpp"
-        "src/Gait.cpp"
-        "src/IK.cpp"
-        "src/platform.cpp"
+        # "src/Phoenix.c"
+        # "src/Gait.c"
+        # "src/IK.c"
+        "src/platform.c"
     INCLUDE_DIRS
         "inc"
     PRIV_REQUIRES
