@@ -1,12 +1,10 @@
 idf_component_register(
     SRCS
-        "pca9685.c"
+        "Servo.c"
     INCLUDE_DIRS
-        "."
+        "inc"
         "../Phoenix/inc"
+        "../PCA9685"
     REQUIRES
-        driver
         log
-    PRIV_REQUIRES
-        esp_driver_i2c
 )

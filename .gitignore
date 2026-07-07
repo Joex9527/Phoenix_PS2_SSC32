@@ -1,21 +1,11 @@
-build/CMakeCache.txt
-build/CMakeFiles/
-build/app-flash_args
-build/bootloader/
-build/bootloader-flash_args
-build/bootloader-prefix/
-build/flash_app_args
-build/flash_args
-build/flash_args.in
-build/flash_bootloader_args
-build/flash_project_args
-build/flasher_args.json
-build/gdbinit/
-build/ldgen_libraries
-build/ldgen_libraries.in
-build/log/
-build/partition-table-flash_args
-build/partition_table/
-build/project_elf_src_esp32s3.c
-build/x509_crt_bundle.S
-build/esp-idf/
+# ESP-IDF build output
+build/
+
+# IDE settings (machine-specific)
+.vscode/settings.json
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo

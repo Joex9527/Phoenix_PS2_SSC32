@@ -5,4 +5,12 @@ idf_component_register(
     INCLUDE_DIRS
         "."
         "../components/Phoenix/inc"
+        "../components/PCA9685"
+        "../components/Servo/inc"
+        "../components/PS2/inc"
+        "../components/SerialProtocol/inc"
+    REQUIRES
+        driver
+        freertos
+        esp_timer
 )
